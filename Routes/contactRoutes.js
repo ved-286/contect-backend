@@ -1,34 +1,25 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { 
+  getAllContacts, 
+  createContact,
+  getContactById,
+  updateContact,
+  deleteContact
+} from '../controllers/contactController.js';
 
 const router = express.Router();
 
 // GET all contacts
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Get all contacts' });
-});
+router.get('/', getAllContacts);
 
-router.post("/", (req, res) => {
-    
-    
-    if (!req.body) {
-        return res.status(400).json({ message: "Request body is missing" });
-    }
+router.post("/",createContact);
 
-    const { name, email, phone } = req.body;
-    
-    if (!name || !email || !phone) {
-        return res.status(400).json({ message: "All fields are required" });
-    }
+router.get("/:id",getContactById);
 
-    const newContact = {
-        id: uuidv4(),
-        name,
-        email,
-        phone
-    };
-    
-    res.status(201).json({message:"Contact created successfully",contact:newContact});
-});
+router.put("/:id",updateContact);
+
+router.delete("/:id",deleteContact);
+
 
 export default router;
+// Remove the extra closing bracket and parenthesis as they are not n
