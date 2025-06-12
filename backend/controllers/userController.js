@@ -29,7 +29,7 @@ export const regesterUser = expressAsyncHandler(async (req,res)=>{
     });
     console.log(user);
 
-    res.json({message:"User registered successfully"});
+    res.status(201).json({message:"User registered successfully"});
 })
 
 export const loginUser = expressAsyncHandler(async (req,res)=>{
